@@ -1,0 +1,17 @@
+def iSS(set, n, tar):
+    if n == 0:
+        return False
+    if tar == 0:
+        return True
+    if set[n-1] > tar:
+        return iSS(set, n-1, tar)
+    
+    return iSS(set, n-1, tar) or iSS(set, n-1, tar - set[n-1])
+
+arr = [2,1,9,8,7,10,12,15]
+tar = 6
+n = len(arr)
+if iSS(arr, n, tar):
+    print("subset Found")
+else:
+    print("Subset not Found")
