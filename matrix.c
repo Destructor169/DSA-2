@@ -49,9 +49,20 @@ void printMat(int **X, int n){
 //b. S[i,j] will contain the index of the last multiplicaion in the subproblem A[i..j]
 // Checks: Our script will check if you have set the correct values of M[i,j] and S[i,j]
 
-void MCM(int n, int *p, int **M, int **S){
-  
-
+void MCM(int n, int *p, int **M, int **S) {
+    for (int L = 2; L < n+1; L++) {
+        for (int i = 0; i < n - L + 1; i++) {
+            int j = i + L - 1;
+            M[i][j] = 2000000000;
+            for (int k = i; k <= j-1; k++) {
+                int q = M[i][k] + M[k + 1][j] + p[i] * p[k+1] * p[j+1];
+                if (q < M[i][j]) {
+                    M[i][j] = q;
+                    S[i][j] = k;
+                }
+            }
+        }
+    }
 }
 
 int main(){
